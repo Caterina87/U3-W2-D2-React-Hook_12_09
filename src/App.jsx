@@ -9,35 +9,39 @@ import BookList from "./components/BookList";
 
 import fantasy from "./data/fantasy.json";
 import CommentArea from "./components/CommentArea";
-import { Component } from "react";
+import { useState } from "react";
 
-class App extends Component {
-  state = {
-    selectedAsin: ""
+const App = () => {
+  // state = {
+  //   selectedAsin: ""
+  // };
+
+  const [selectedAsin, setSelectedAsin] = useState("");
+
+  const setNewAsin = (asin) => {
+    setSelectedAsin(asin);
   };
 
-  setNewAsin = asin => {
-    this.setState({ selectedAsin: asin });
-  };
+  // setNewAsin = asin => {
+  //   this.setState({ selectedAsin: asin });
+  // };
 
-  render() {
-    return (
-      <Container>
-        <MyNav />
-        <MyJumbotron />
-        {/* <AllTheBooks /> */}
-        <Row>
-          <Col md={8}>
-            <BookList books={fantasy} setNewAsin={this.setNewAsin} selectedAsin={this.state.selectedAsin} />
-          </Col>
-          <Col md={4}>
-            <CommentArea asin={this.state.selectedAsin} />
-          </Col>
-        </Row>
-        <MyFooter />
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <MyNav />
+      <MyJumbotron />
+      {/* <AllTheBooks /> */}
+      <Row>
+        <Col md={8}>
+          <BookList books={fantasy} setNewAsin={setNewAsin} selectedAsin={selectedAsin} />
+        </Col>
+        <Col md={4}>
+          <CommentArea asin={selectedAsin} />
+        </Col>
+      </Row>
+      <MyFooter />
+    </Container>
+  );
+};
 
 export default App;
